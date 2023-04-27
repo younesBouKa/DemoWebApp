@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>org.example</groupId>
+    <artifactId>WebApp</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <packaging>war</packaging>
+    <name>DemoWebApp</name>
+
+    <properties>
+        <!--        general -->
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!--        libraries versions -->
+        <javax.inject.version>1</javax.inject.version>
+        <log4j.api.version>2.6.1</log4j.api.version>
+        <log4j.core.version>2.6.1</log4j.core.version>
+        <!--        plugins versions -->
+        <maven.assembly.plugin.version>3.5.0</maven.assembly.plugin.version>
+        <maven.war.plugin.version>3.2.0</maven.war.plugin.version>
+        <!--        modules versions -->
+        <web.version>1.0-SNAPSHOT</web.version>
+
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.frame</groupId>
+            <artifactId>Web</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>${javax.inject.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-api</artifactId>
+            <version>${log4j.api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-core</artifactId>
+            <version>${log4j.core.version}</version>
+        </dependency>
+    </dependencies>
+    <build>
+        <finalName>webapp</finalName>
+    </build>
+</project>
