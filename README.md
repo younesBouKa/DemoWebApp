@@ -1,2 +1,2 @@
 # DemoWebApp
-Demo web app using MiniFrame
+J2EE web application using MiniFrame
