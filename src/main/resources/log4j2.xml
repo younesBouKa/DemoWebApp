@@ -75,8 +75,8 @@
         <Root level="DEBUG">
             <AppenderRef ref="stdout"/>
             <AppenderRef ref="fout"/>
-            <AppenderRef ref="roll-by-time"/>
-            <AppenderRef ref="roll-by-size"/>
+            <!--<AppenderRef ref="roll-by-time"/>
+            <AppenderRef ref="roll-by-size"/>-->
             <AppenderRef ref="roll-by-time-and-size"/>
         </Root>
     </Loggers>
