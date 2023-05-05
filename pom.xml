@@ -56,6 +56,6 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>demowebapp</finalName>
+        <finalName>${artifactId}-${version}</finalName>
     </build>
 </project>
