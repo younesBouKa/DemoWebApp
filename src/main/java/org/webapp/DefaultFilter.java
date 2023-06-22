@@ -1,6 +1,7 @@
 package org.webapp;
 
 import org.tools.Log;
+import org.tools.exceptions.FrameworkException;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -14,7 +15,7 @@ public class DefaultFilter implements javax.servlet.Filter {
     public void init(FilterConfig filterConfig) throws ServletException {
         logger.debug("Filter config: "+filterConfig.toString());
         this.staticResourceFolder = filterConfig.getInitParameter("staticResourceFolder");
-        if(staticResourceFolder==null || staticResourceFolder.isEmpty())
+        if(staticResourceFolder==null || staticResourceFolder.trim().isEmpty())
             staticResourceFolder = "/WEB-INF/static";
     }
 
@@ -24,16 +25,12 @@ public class DefaultFilter implements javax.servlet.Filter {
                          FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest req = (HttpServletRequest) servletRequest;
         String path = req.getRequestURI().substring(req.getContextPath().length());
-
-        if (path.startsWith("/webapp/static")) {
-            String resourcePath = path.replace("/webapp/static",staticResourceFolder);
-            servletRequest
-                    .getRequestDispatcher(resourcePath)
-                    .forward(servletRequest, servletResponse);
-        } else {
-            servletRequest.getRequestDispatcher(path)
-                    .forward(servletRequest, servletResponse);
-        }
+        if (path.startsWith("/static"))
+            path = path.replace("/static",staticResourceFolder);
+        RequestDispatcher requestDispatcher = servletRequest.getRequestDispatcher(path);
+        if(requestDispatcher==null)
+            throw new FrameworkException("Can't find request dispatcher for path : "+path);
+        requestDispatcher.forward(servletRequest, servletResponse);
     }
 
     @Override

@@ -6,7 +6,7 @@
     <artifactId>demowebapp</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <name>DemoWebApp</name>
 
     <properties>
@@ -21,19 +21,20 @@
         <!--        plugins versions -->
         <maven.assembly.plugin.version>3.5.0</maven.assembly.plugin.version>
         <maven.war.plugin.version>3.2.0</maven.war.plugin.version>
+        <appassembler.version>1.1.1</appassembler.version>
         <!--        modules versions -->
         <web.version>1.0-SNAPSHOT</web.version>
 
     </properties>
 
     <repositories>
-        <repository>
+       <!-- <repository>
             <id>github-repo</id>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
             <url>https://raw.githubusercontent.com/younesBouKa/MiniFrame/repository/mvn-repo</url>
-        </repository>
+        </repository>-->
     </repositories>
 
     <distributionManagement>
@@ -67,6 +68,31 @@
         </dependency>
     </dependencies>
     <build>
-        <finalName>${artifactId}-${version}</finalName>
+        <plugins>
+            <!-- for packaging-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>appassembler-maven-plugin</artifactId>
+                <version>${appassembler.version}</version>
+                <configuration>
+                    <assembleDirectory>target</assembleDirectory>
+                    <programs>
+                        <program>
+                            <mainClass>org.webapp.Main</mainClass>
+                            <name>webapp</name>
+                        </program>
+                    </programs>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>assemble</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <finalName>${project.artifactId}-${project.version}</finalName>
     </build>
 </project>
